@@ -3,11 +3,11 @@
     <input
         class="search-input"
         :value="query"
-        @input="onSearchInput"
+        @input="(e) => onSearch(e.target.value)"
         type="text"
         placeholder="Search movies..."
     />
-    <div v-if="query" class="clear" @click="onClearClick" />
+    <div v-if="query" class="clear" @click="onClear" />
   </div>
 </template>
 
@@ -17,14 +17,6 @@
     onSearch: (query: string) => void;
     onClear: () => void;
   }>();
-
-  const onSearchInput = (event: HTMLInputElement) => {
-    onSearch(event.target.value);
-  };
-
-  const onClearClick = () => {
-    onClear();
-  };
 </script>
 
 <style scoped>

@@ -26,14 +26,18 @@
   import { getPosterUrl } from '@/helpers/imageHelpers';
   import type { Movie } from '@/types/movie';
 
-  const { movie, isFavorite, onToggleFavorite } = defineProps<{
+  const { movie, isFavorite } = defineProps<{
     movie: Movie;
     isFavorite: boolean;
     onToggleFavorite: (movieId: number) => void;
   }>();
 
+  const emit = defineEmits<{
+    (e: 'toggle-favorite', movieId: number): void;
+  }>();
+
   const handleToggleFavorite = () => {
-    onToggleFavorite(movie.id);
+    emit('toggle-favorite', movie.id);
   };
 </script>
 

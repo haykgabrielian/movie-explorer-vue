@@ -21,7 +21,7 @@
           :key="movie.id"
           :movie="movie"
           :isFavorite="favoriteIds.includes(movie.id)"
-          :onToggleFavorite="handleToggleFavorite"
+          @toggle-favorite="handleToggleFavorite"
       />
     </div>
   </div>
