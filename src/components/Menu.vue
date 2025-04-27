@@ -32,7 +32,7 @@
     display: block;
     width: 100%;
     height: 2px;
-    background-color: #000;
+    background-color: #fff;
     transition-duration: 0.3s, 0.3s;
   }
 

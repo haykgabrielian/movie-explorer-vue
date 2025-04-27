@@ -72,7 +72,7 @@
   }
 
   .title {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     font-size: 20px;
     font-weight: bold;
   }
@@ -103,9 +103,12 @@
   }
 
   .clear-button {
+    width: 120px;
     margin-top: 20px;
     padding: 10px;
     color: #fff;
+    background: #444;
+    text-align: center;
     border: none;
     cursor: pointer;
     border-radius: 5px;
