@@ -1,7 +1,7 @@
 <template>
   <header class="header-wrapper">
     <Menu :open="isSidebarOpen" :onSidebarToggle="onSidebarToggle" />
-    <Search :query="query" :onSearch="onSearch" :onClear="onClear" />
+    <Search :query="query" @search="onSearch" @clear="onClear" />
   </header>
 </template>
 

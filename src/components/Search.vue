@@ -3,7 +3,7 @@
     <input
         class="search-input"
         :value="query"
-        @input="(e) => onSearch(e.target.value)"
+        @input="onSearch"
         type="text"
         placeholder="Search movies..."
     />
@@ -12,11 +12,23 @@
 </template>
 
 <script setup lang="ts">
-  const { query, onSearch, onClear } = defineProps<{
-    query: string;
-    onSearch: (query: string) => void;
-    onClear: () => void;
+  const emit = defineEmits<{
+    (event: 'search', query: string): void;
+    (event: 'clear'): void;
   }>();
+
+  const { query } = defineProps<{
+    query: string;
+  }>();
+
+  const onSearch = (event: Event) => {
+    const inputElement = event.target as HTMLInputElement;
+    emit('search', inputElement.value);
+  };
+
+  const onClear = () => {
+    emit('clear');
+  };
 </script>
 
 <style scoped>
