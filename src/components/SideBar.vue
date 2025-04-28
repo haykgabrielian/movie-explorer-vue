@@ -1,7 +1,11 @@
 <template>
   <div
       class="sidebar-container"
-      :class="{ 'sidebar-open': isSidebarOpen }"
+      :class="{
+      'sidebar-open': isSidebarOpen,
+      'light': theme.theme === 'light',
+      'dark': theme.theme === 'dark'
+    }"
   >
     <h2>Filter By</h2>
     <div v-if="isLoading" class="loading">Loading genres...</div>
@@ -34,6 +38,7 @@
 
 <script setup lang="ts">
   import { useGenres } from '@/composables/useGanres';
+  import { useInjectTheme } from '@/composables/useTheme';
 
   const { isSidebarOpen, selectedGenres, onToggleGenre, onGenreClear } = defineProps<{
     isSidebarOpen: boolean;
@@ -41,6 +46,8 @@
     onToggleGenre: (genreId: number) => void;
     onGenreClear: () => void;
   }>();
+
+  const { theme } = useInjectTheme();
 
   const { data, isLoading, error } = useGenres();
 </script>
@@ -58,6 +65,13 @@
     z-index: 1000;
     transform: translateX(-100%);
     transition: transform 0.3s ease-in-out;
+  }
+
+  .sidebar-container.light {
+    background-color: #afafaf;
+  }
+  .sidebar-container.dark {
+    background-color: #333;
   }
 
   .sidebar-open {

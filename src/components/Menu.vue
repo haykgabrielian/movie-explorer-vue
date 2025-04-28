@@ -4,17 +4,20 @@
       :class="{ 'open': open }"
       @click="onSidebarToggle"
   >
-    <div class="menu-item"></div>
-    <div class="menu-item"></div>
-    <div class="menu-item"></div>
+    <div class="menu-item" :class="theme.theme"></div>
+    <div class="menu-item" :class="theme.theme"></div>
+    <div class="menu-item" :class="theme.theme"></div>
   </div>
 </template>
 
 <script setup lang="ts">
+  import { useInjectTheme } from '@/composables/useTheme';
   const { open, onSidebarToggle } = defineProps<{
     open: boolean;
     onSidebarToggle: () => void
   }>();
+
+  const { theme } = useInjectTheme();
 </script>
 
 <style scoped>
@@ -32,8 +35,14 @@
     display: block;
     width: 100%;
     height: 2px;
-    background-color: #fff;
     transition-duration: 0.3s, 0.3s;
+  }
+
+  .menu-item.light {
+    background-color: #424242;
+  }
+  .menu-item.dark {
+    background-color: #cccccc;
   }
 
   .menu-item:nth-child(1) {

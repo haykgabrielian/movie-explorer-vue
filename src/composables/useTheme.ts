@@ -1,28 +1,27 @@
-import { reactive, provide, inject, watch } from 'vue';
+import { reactive, watch, inject } from 'vue';
 
-interface ThemeState { theme: 'light' | 'dark' }
+export interface ThemeState {
+    theme: 'light' | 'dark';
+}
 
 const savedTheme = localStorage.getItem('theme');
-const themeState = reactive<ThemeState>({
+export const themeState = reactive<ThemeState>({
     theme: savedTheme === 'dark' ? 'dark' : 'light',
 });
 
 watch(() => themeState.theme, (newTheme) => {
     localStorage.setItem('theme', newTheme);
+    document.body.classList.remove('light', 'dark');
+    document.body.classList.add(newTheme);
 });
 
-export const useProvideTheme = () => {
-    const toggleTheme = () => {
-        themeState.theme = themeState.theme === 'light' ? 'dark' : 'light';
-    };
-
-    provide('theme', themeState);
-    provide('toggleTheme', toggleTheme);
+export const toggleTheme = () => {
+    themeState.theme = themeState.theme === 'light' ? 'dark' : 'light';
 };
 
 export const useInjectTheme = () => {
-    const theme = inject('theme');
-    const toggleTheme = inject('toggleTheme');
+    const theme = inject<ThemeState>('theme');
+    const toggleTheme = inject<() => void>('toggleTheme');
 
     if (!theme || !toggleTheme) {
         throw new Error('Theme context is not provided');
